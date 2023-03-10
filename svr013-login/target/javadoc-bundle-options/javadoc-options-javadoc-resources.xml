@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<javadocOptions>
+  <docletArtifacts>
+    <docletArtifact>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-java2wadl-plugin</artifactId>
+      <version>3.2.7.fuse-760026-redhat-00001</version>
+    </docletArtifact>
+  </docletArtifacts>
+</javadocOptions>

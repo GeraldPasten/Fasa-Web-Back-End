@@ -1,0 +1,66 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"><grammars><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+    <xs:element name="recursoRol" type="recursoRol"/>
+    <xs:element name="recursos" type="recursos"/>
+    <xs:element name="response" type="response"/>
+    <xs:element name="response1" type="response1"/>
+    <xs:element name="rolUsuario" type="rolUsuario"/>
+    <xs:element name="roles" type="roles"/>
+    <xs:complexType name="response">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_rol" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="recursos">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="clase" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_aplicacion" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_recursos" type="xs:string"/>
+            <xs:element minOccurs="0" name="nombre_fisico" type="xs:string"/>
+            <xs:element minOccurs="0" name="nombre_logico" type="xs:string"/>
+            <xs:element minOccurs="0" name="vigencia" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="rolUsuario">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_aplicacion" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_recurso" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_rol" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_usuario" type="xs:string"/>
+            <xs:element minOccurs="0" name="vigencia" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="response1">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="recursoRol">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_aplicacion" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_recurso" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_recursoPadre" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_rol" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="roles">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_aplicacion" type="xs:string"/>
+            <xs:element minOccurs="0" name="id_rol" type="xs:string"/>
+            <xs:element minOccurs="0" name="menu_xml" type="xs:string"/>
+            <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+            <xs:element minOccurs="0" name="vigencia" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+</grammars><resources base="/"><resource path="/services/"><resource path="act/roles"><method name="POST"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="act/usuario/rol"><method name="POST"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="asociar/recursos"><method name="PUT"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="asociar/rol/usuario"><method name="PUT"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="del/recurso/rol"><method name="DELETE"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="del/roles"><method name="DELETE"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="ins/roles"><method name="PUT"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="leer/recurso"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="leer/recursos/rol"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="leer/roles"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="listar/recurso"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="listar/recurso/rol"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="listar/usuario/rol"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource></resource></resources></application>

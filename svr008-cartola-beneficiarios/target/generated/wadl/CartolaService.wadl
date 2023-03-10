@@ -1,0 +1,28 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"><grammars><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+    <xs:element name="response" type="response"/>
+    <xs:complexType name="response">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="b64" type="xs:string"/>
+            <xs:element name="boleta" type="xs:int"/>
+            <xs:element name="bonificado" type="xs:int"/>
+            <xs:element name="cantidad" type="xs:int"/>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="comuna" type="xs:string"/>
+            <xs:element name="copago" type="xs:int"/>
+            <xs:element minOccurs="0" name="decripcion_producto" type="xs:string"/>
+            <xs:element name="descto" type="xs:int"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="direccion" type="xs:string"/>
+            <xs:element minOccurs="0" name="estado" type="xs:string"/>
+            <xs:element name="farmacia" type="xs:int"/>
+            <xs:element minOccurs="0" name="fecha" type="xs:string"/>
+            <xs:element name="guia" type="xs:int"/>
+            <xs:element name="id_receta" type="xs:int"/>
+            <xs:element name="precio" type="xs:int"/>
+            <xs:element name="SAP" type="xs:int"/>
+            <xs:element minOccurs="0" name="tipo" type="xs:string"/>
+            <xs:element name="total" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+</grammars><resources base="/"><resource path="/services/"><resource path="ver/cartola"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation><representation mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></representation></response></method></resource></resource></resources></application>

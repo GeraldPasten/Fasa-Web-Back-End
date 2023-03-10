@@ -1,0 +1,8 @@
+cl\api\karaf\eliminar\EliminarService.class
+cl\api\karaf\eliminar\package-info.class
+cl\api\karaf\eliminar\model\eliminar.class
+cl\api\karaf\eliminar\provider\conexionServicio.class
+cl\api\karaf\eliminar\model\Usuario.class
+cl\api\karaf\eliminar\ApiSeguridad.class
+cl\api\karaf\eliminar\provider\CORSFilter.class
+cl\api\karaf\eliminar\ApiReportes.class

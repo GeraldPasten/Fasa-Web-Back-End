@@ -1,0 +1,11 @@
+cl\api\karaf\empresa\ApiSeguridad.class
+cl\api\karaf\empresa\provider\conexionServicio.class
+cl\api\karaf\empresa\ApiReportes.class
+cl\api\karaf\empresa\model\Response1.class
+cl\api\karaf\empresa\model\respuesta.class
+cl\api\karaf\empresa\EmpresaService.class
+cl\api\karaf\empresa\model\empresa.class
+cl\api\karaf\empresa\model\UsuarioEmpresa.class
+cl\api\karaf\empresa\model\OutActualizar.class
+cl\api\karaf\empresa\package-info.class
+cl\api\karaf\empresa\provider\CORSFilter.class

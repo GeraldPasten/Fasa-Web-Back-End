@@ -1,0 +1,40 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"><grammars><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+    <xs:element name="empresa" type="empresa"/>
+    <xs:element name="outActualizar" type="outActualizar"/>
+    <xs:element name="usuarioEmpresa" type="usuarioEmpresa"/>
+    <xs:complexType name="outActualizar">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigoResultado" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalleResultado" type="xs:string"/>
+            <xs:element minOccurs="0" name="outSeq" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="usuarioEmpresa">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="apellido" type="xs:string"/>
+            <xs:element minOccurs="0" name="apellido2" type="xs:string"/>
+            <xs:element minOccurs="0" name="cargo" type="xs:string"/>
+            <xs:element minOccurs="0" name="celular" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="convenio" type="xs:string"/>
+            <xs:element minOccurs="0" name="correo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="id" type="xs:string"/>
+            <xs:element minOccurs="0" name="kamConvenios" type="xs:string"/>
+            <xs:element minOccurs="0" name="kamCorreo" type="xs:string"/>
+            <xs:element minOccurs="0" name="ndocumento" type="xs:string"/>
+            <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+            <xs:element minOccurs="0" name="rut" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="empresa">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="idEmpresa" type="xs:string"/>
+            <xs:element minOccurs="0" name="nombreEmpresa" type="xs:string"/>
+            <xs:element minOccurs="0" name="rutEmpresa" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+</grammars><resources base="/"><resource path="/services/"><resource path="actualizarConvenio"><method name="PUT"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"><param name="result" style="plain" type="xs:string"></param></representation></response></method></resource><resource path="actualizarEmpresa"><method name="PUT"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="leerEmpresa"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="listarConvenios"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource></resource></resources></application>

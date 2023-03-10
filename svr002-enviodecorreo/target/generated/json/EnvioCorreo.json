@@ -1,0 +1,41 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "7.6.0.fuse-760025-redhat-00001",
+    "title" : "Red Hat Fuse :: SVR002-ENVIODECORREO :: rest",
+    "contact" : { },
+    "license" : {
+      "name" : "Apache 2.0 License",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath" : "/api",
+  "tags" : [ {
+    "name" : "services"
+  } ],
+  "paths" : {
+    "/services/enviar" : {
+      "post" : {
+        "tags" : [ "services" ],
+        "operationId" : "sendMail",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

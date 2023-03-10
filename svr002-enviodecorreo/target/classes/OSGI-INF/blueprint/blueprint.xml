@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter" class="cl.api.karaf.provider.CORSFilter" />
+
+	<bean id="enviocorreo" class="cl.api.karaf.EnvioCorreo" />
+
+	<cxf:rsServer id="services" address="/correo"
+		serviceClass="cl.api.karaf.EnvioCorreo">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<camelContext id="srv002-enviocorreo"
+		xmlns="http://camel.apache.org/schema/blueprint">
+		<route id="_route1">
+
+			<from id="_rfwsLocation" uri="cxfrs:bean:services" />
+			<to id="_to1" uri="log:body?level=INFO" />
+
+			<setBody>
+				<simple>
+					{
+					"toEmailUser":"${headers.toEmailUser}",
+					"subject":"${headers.subject}",
+					"bodyMail":"${headers.bodyMail}",
+					"smtpFriendlyDisplayName": "${headers.smtpFriendlyDisplayName}",
+					"smtpFriendlyMailName": "${headers.smtpFriendlyMailName}",
+					"smtpReplyDisplayName": "${headers.smtpReplyDisplayName}"
+					}
+				</simple>
+			</setBody>
+			<!-- <log loggingLevel="INFO" message="\n${body}" /> -->
+			<bean method="sendMail" ref="enviocorreo"></bean>
+		</route>
+
+	</camelContext>
+
+</blueprint>

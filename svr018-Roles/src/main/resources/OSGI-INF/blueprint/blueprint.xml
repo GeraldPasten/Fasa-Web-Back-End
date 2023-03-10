@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.base.karaf.convenios.provider.CORSFilter" />
+
+	<bean id="ora"
+		class="cl.api.base.karaf.convenios.ApiOracleService" />
+
+	<cxf:rsServer id="leerRoles" address="/leerRoles"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="insRoles" address="/ins"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="actRoles" address="/actRol"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="delRoles" address="/delRol"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="leerRecursos" address="/getRecursos"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="listarRecurso" address="/getAllrecursos"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="leerRecursosRol"
+		address="/getRecursosRol"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="listarRecursosRol"
+		address="/getAllRecursosRol"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="asociarRecurso" address="/asociar"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="quitarRecurso" address="/quitar"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="asociarUsuarioRol"
+		address="/asociarUsuario"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="leerUsuarioRol" address="/getUsuarioRol"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="actualizarUsuarioRol"
+		address="/actUsuarioRol"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<camelContext id="usuarioPaciente-context"
+		xmlns="http://camel.apache.org/schema/blueprint">
+
+		<route id="_route2">
+			<from id="_rfwsLocation" uri="cxfrs:bean:leerRoles" />
+
+			<convertBodyTo id="_convertBodyTo2"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"token":"${headers.token}"}
+				</simple>
+			</setBody>
+			<bean method="getRoles" ref="ora"></bean>
+		</route>
+
+		<route id="_route3">
+			<from id="_rfwsLocation3" uri="cxfrs:bean:insRoles" />
+
+			<convertBodyTo id="_convertBodyTo3"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"nombre":"${headers.nombre}","vigencia":"${headers.vigencia}","userRep":"${headers.userRep}","recursos":"${headers.recursos}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="insRoles" ref="ora"></bean>
+		</route>
+
+		<route id="_route4">
+			<from id="_rfwsLocation4" uri="cxfrs:bean:actRoles" />
+
+			<convertBodyTo id="_convertBodyTo4"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"id_rol":"${headers.id_rol}","nombre":"${headers.nombre}","vigencia":"${headers.vigencia}","userRep":"${headers.userRep}","recursos":"${headers.recursos}","nuevoRecurso":"${headers.nuevoRecurso}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="actRoles" ref="ora"></bean>
+		</route>
+
+		<route id="_route5">
+			<from id="_rfwsLocation5" uri="cxfrs:bean:delRoles" />
+
+			<convertBodyTo id="_convertBodyTo5"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"id_rol":"${headers.id_rol}","userRep":"${headers.userRep}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="delRoles" ref="ora"></bean>
+		</route>
+
+		<route id="_route6">
+			<from id="_rfwsLocation6" uri="cxfrs:bean:leerRecursosRol" />
+
+			<convertBodyTo id="_convertBodyTo6"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"id_recurso":"${headers.id_recurso}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="getRecursosRol" ref="ora"></bean>
+		</route>
+
+		<route id="_route7">
+			<from id="_rfwsLocation7" uri="cxfrs:bean:leerRecursos" />
+
+			<convertBodyTo id="_convertBodyTo7"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"id_recurso":"${headers.id_recurso}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="getRecursos" ref="ora"></bean>
+		</route>
+
+		<route id="_route8">
+			<from id="_rfwsLocation8" uri="cxfrs:bean:listarRecurso" />
+			<convertBodyTo id="_convertBodyTo8"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"token":"${headers.token}"}
+				</simple>
+			</setBody>
+			<bean method="getAllRecursos" ref="ora"></bean>
+		</route>
+
+		<route id="_route9">
+			<from id="_rfwsLocation9" uri="cxfrs:bean:listarRecursosRol" />
+			<convertBodyTo id="_convertBodyTo9"
+				type="java.lang.String" />
+			<setBody>
+				<simple>{"id_rol":"${headers.id_rol}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="getAllRecursosRol" ref="ora"></bean>
+		</route>
+
+		<route id="_route10">
+			<from id="_rfwsLocation10" uri="cxfrs:bean:asociarRecurso" />
+			<convertBodyTo id="_convertBodyTo10"
+				type="java.lang.String" />
+			<setBody>
+				<simple>{"id_rol":"${headers.id_rol}","id_recurso":"${headers.id_recurso}","id_recursoPadre":"${headers.id_recursoPadre}","userRep":"${headers.userRep}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="asociarRecurso" ref="ora"></bean>
+		</route>
+
+		<route id="_route11">
+			<from id="_rfwsLocation11" uri="cxfrs:bean:quitarRecurso" />
+			<convertBodyTo id="_convertBodyTo11"
+				type="java.lang.String" />
+			<setBody>
+				<simple>{"id_recurso":"${headers.id_recurso}","userRep":"${headers.userRep}","id_rol":"${headers.id_rol}","id_recursoPadre":"${headers.id_recursoPadre}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="delRecursoRol" ref="ora"></bean>
+		</route>
+
+		<route id="_route12">
+			<from id="_rfwsLocation12" uri="cxfrs:bean:asociarUsuarioRol" />
+			<convertBodyTo id="_convertBodyTo12"
+				type="java.lang.String" />
+			<setBody>
+				<simple>
+					{"id_rol":"${headers.id_rol}","id_usuario":"${headers.id_usuario}","userRep":"${headers.userRep}","vigencia":"${headers.vigencia}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="asociarUsuarioRol" ref="ora"></bean>
+		</route>
+
+		<route id="_route13">
+			<from id="_rfwsLocation13" uri="cxfrs:bean:leerUsuarioRol" />
+			<convertBodyTo id="_convertBodyTo13"
+				type="java.lang.String" />
+			<setBody>
+				<simple>
+					{"id_usuario":"${headers.id_usuario}"}
+				</simple>
+			</setBody>
+
+			<bean method="getUsuarioRol" ref="ora"></bean>
+		</route>
+
+		<route id="_route14">
+			<from id="_rfwsLocation14" uri="cxfrs:bean:actualizarUsuarioRol" />
+			<convertBodyTo id="_convertBodyTo14"
+				type="java.lang.String" />
+			<setBody>
+				<simple>
+					{"id_usuario":"${headers.id_usuario}","id_rol":"${headers.id_rol}","id_rolNuevo":"${headers.id_rolNuevo}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="actRolUsuario" ref="ora"></bean>
+		</route>
+
+
+	</camelContext>
+
+
+
+</blueprint>

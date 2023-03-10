@@ -1,0 +1,5 @@
+cl\api\karaf\seguridad\provider\conexionServicio.class
+cl\api\karaf\seguridad\provider\CORSFilter.class
+cl\api\karaf\seguridad\SeguridadService.class
+cl\api\karaf\seguridad\model\responseToken.class
+cl\api\karaf\seguridad\model\response.class

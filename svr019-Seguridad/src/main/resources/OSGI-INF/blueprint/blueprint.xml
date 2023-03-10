@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.karaf.seguridad.provider.CORSFilter" />
+
+	<bean id="ora" class="cl.api.karaf.seguridad.SeguridadService" />
+
+	<cxf:rsServer id="security" address="/security"
+		serviceClass="cl.api.karaf.seguridad.SeguridadService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+	
+	<cxf:rsServer id="securityToken" address="/securityToken"
+		serviceClass="cl.api.karaf.seguridad.SeguridadService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<camelContext id="reporte1"
+		xmlns="http://camel.apache.org/schema/blueprint">
+		<route id="_route1">
+			<from id="_rfwsLocation" uri="cxfrs:bean:security" />
+
+			<to id="_to1" uri="log:body?level=INFO" />
+
+			<convertBodyTo id="_convertBodyTo1"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"usuario":"${headers.usuario}","password":"${headers.password}"}
+				</simple>
+			</setBody>
+
+			<bean method="TokenSeguridad" ref="ora"></bean>
+		</route>
+		
+		<route id="_route2">
+			<from id="_rfwsLocation" uri="cxfrs:bean:securityToken" />
+
+			<to id="_to2" uri="log:body?level=INFO" />
+
+			<convertBodyTo id="_convertBodyTo2"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="ValidaTokenSeguridad" ref="ora"></bean>
+		</route>
+
+
+	</camelContext>
+
+</blueprint>

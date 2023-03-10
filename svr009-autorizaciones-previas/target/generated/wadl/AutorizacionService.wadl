@@ -1,0 +1,31 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"><grammars><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+    <xs:element name="autorizacionPrevia" type="autorizacionPrevia"/>
+    <xs:element name="response" type="response"/>
+    <xs:complexType name="autorizacionPrevia">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="campo" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigoPersona" type="xs:string"/>
+            <xs:element minOccurs="0" name="credencial" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="LAPB_416_ID_AP" type="xs:string"/>
+            <xs:element minOccurs="0" name="LAPB_ACUMULADO_ENVASES_MENSUAL" type="xs:string"/>
+            <xs:element minOccurs="0" name="LAPB_FECHA_INICIO" type="xs:string"/>
+            <xs:element minOccurs="0" name="LAPB_FECHA_TERMINO" type="xs:string"/>
+            <xs:element minOccurs="0" name="LAPB_INCLUIR_EXCLUIR" type="xs:string"/>
+            <xs:element minOccurs="0" name="LAPB_MEDICO_INCEXC" type="xs:string"/>
+            <xs:element minOccurs="0" name="LAPB_Q_ENVASES_MENSUAL" type="xs:string"/>
+            <xs:element minOccurs="0" name="LAPB_VALOR_CAMPO" type="xs:string"/>
+            <xs:element minOccurs="0" name="LMA_ID_MEDICO" type="xs:string"/>
+            <xs:element minOccurs="0" name="PLA_524_PLAN_ID" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="response">
+        <xs:sequence>
+            <xs:element name="codigo" type="xs:int"/>
+            <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+            <xs:element name="id" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+</grammars><resources base="/"><resource path="/services/"><resource path="insertar/autorizaciones"><method name="POST"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="listar/autorizaciones"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource></resource></resources></application>

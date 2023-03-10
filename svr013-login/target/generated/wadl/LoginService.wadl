@@ -1,0 +1,11 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"><grammars><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+    <xs:element name="login" type="login"/>
+    <xs:complexType name="login">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigoResultadoLogin" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalleResultado" type="xs:string"/>
+            <xs:element minOccurs="0" name="tipo" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+</grammars><resources base="/"><resource path="/services/"><resource path="login"><method name="POST"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource></resource></resources></application>

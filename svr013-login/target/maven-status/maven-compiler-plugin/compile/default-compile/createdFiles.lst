@@ -1,0 +1,5 @@
+cl\api\karaf\login\model\Login.class
+cl\api\karaf\login\provider\CORSFilter.class
+cl\api\karaf\login\provider\conexionServicio.class
+cl\api\karaf\login\LoginService.class
+cl\api\karaf\login\package-info.class

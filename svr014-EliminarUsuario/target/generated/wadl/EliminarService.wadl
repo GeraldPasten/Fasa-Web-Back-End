@@ -1,0 +1,27 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"><grammars><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+    <xs:element name="eliminar" type="eliminar"/>
+    <xs:element name="usuario" type="usuario"/>
+    <xs:complexType name="usuario">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="apellido" type="xs:string"/>
+            <xs:element minOccurs="0" name="apellido2" type="xs:string"/>
+            <xs:element minOccurs="0" name="cargo" type="xs:string"/>
+            <xs:element minOccurs="0" name="celular" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+            <xs:element minOccurs="0" name="correo" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="error" type="xs:string"/>
+            <xs:element minOccurs="0" name="id" type="xs:string"/>
+            <xs:element minOccurs="0" name="ndocumento" type="xs:string"/>
+            <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+            <xs:element minOccurs="0" name="rut" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="eliminar">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="codigoRespuesta" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalleRespuesta" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+</grammars><resources base="/"><resource path="/services/"><resource path="eliminar"><method name="POST"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="listar"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="listar/rep"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource></resource></resources></application>

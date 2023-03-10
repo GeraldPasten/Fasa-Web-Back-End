@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.karaf.login.provider.CORSFilter" />
+
+	<bean id="ora" class="cl.api.karaf.login.LoginService" />
+
+	<cxf:rsServer id="services" address="/web"
+		serviceClass="cl.api.karaf.login.LoginService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<camelContext id="demo-context"
+		xmlns="http://camel.apache.org/schema/blueprint">
+		<route id="_route1">
+
+			<from id="_rfwsLocation" uri="cxfrs:bean:services" />
+			<to id="_to1" uri="log:body?level=INFO" />
+			<log message="ENTRANDO A LOGIN \n" />
+
+			<convertBodyTo id="_convertBodyTo1"
+				type="java.lang.String" />
+			<setBody>
+				<simple>{"user":"${headers.user}","passwd":"${headers.passwd}"}
+				</simple>
+			</setBody>
+
+			<bean method="Login" ref="ora"></bean>
+		</route>
+
+	</camelContext>
+
+
+
+</blueprint>

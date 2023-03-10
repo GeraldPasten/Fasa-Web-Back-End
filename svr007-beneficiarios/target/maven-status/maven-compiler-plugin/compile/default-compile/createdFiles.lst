@@ -1,0 +1,7 @@
+cl\api\karaf\beneficiario\ApiSeguridad.class
+cl\api\karaf\beneficiario\BeneficiarioService.class
+cl\api\karaf\beneficiario\model\response.class
+cl\api\karaf\beneficiario\provider\conexionServicio.class
+cl\api\karaf\beneficiario\ApiReportes.class
+cl\api\karaf\beneficiario\model\actualizaResponse.class
+cl\api\karaf\beneficiario\provider\CORSFilter.class

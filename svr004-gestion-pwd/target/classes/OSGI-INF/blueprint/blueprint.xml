@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.karaf.convenios.provider.CORSFilter" />
+
+	<bean id="ora"
+		class="cl.api.karaf.convenios.ApiOracleService" />
+
+
+	<cxf:rsServer id="ActualizaPwd" address="/recuperar"
+		serviceClass="cl.api.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+	
+	<camelContext id="password-context"
+		xmlns="http://camel.apache.org/schema/blueprint">
+		<route id="_route1">
+
+		<from id="_rfwsLocation" uri="cxfrs:bean:ActualizaPwd" />
+
+			<to id="_to1" uri="log:body?level=INFO" />
+			<log message="ENTRANDO A actualizar PWD\n" />
+
+			<convertBodyTo id="_convertBodyTo1"
+				type="java.lang.String" />
+			<log message="PASSWD  :::::::::::: ${headers.passwd}\n" />
+			<log message="PASSWD  :::::::::::: ${headers.id}\n" />
+			<setBody>
+				<simple>{"user":"${headers.user}","passwd":"${headers.passwd}","userRep":"${headers.userRep}"}
+				</simple>
+			</setBody>
+
+			<bean method="actualizaPwd" ref="ora"></bean>
+		</route>
+		
+
+	</camelContext>
+
+
+
+</blueprint>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.base.karaf.convenios.provider.CORSFilter" />
+
+	<bean id="ora"
+		class="cl.api.base.karaf.convenios.ApiOracleService" />
+
+	<cxf:rsServer id="leerUsuario" address="/usuario"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="ActualizarUsuarioPaciente"
+		address="/actualizar"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="GeneraToken" address="/generatoken"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="ValidaToken" address="/validaToken"
+		serviceClass="cl.api.base.karaf.convenios.ApiOracleService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+
+	<camelContext id="usuarioPaciente-context"
+		xmlns="http://camel.apache.org/schema/blueprint">
+
+		<route id="_route2">
+			<from id="_rfwsLocation" uri="cxfrs:bean:leerUsuario" />
+
+			<log message="ENTRANDO A LEER USUARIO \n" />
+			<log message="USUARIO  ::::::::::::::: ${headers.user}\n" />
+
+			<convertBodyTo id="_convertBodyTo2"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"user":"${headers.user}","userRep":"${headers.userRep}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="getUsuario" ref="ora"></bean>
+		</route>
+
+
+
+		<route id="_route3">
+			<from id="_rfwsLocation"
+				uri="cxfrs:bean:ActualizarUsuarioPaciente" />
+
+			<log message="ENTRANDO A PUT USUARIO \n" />
+			<log message="USUARIO  ::::::::::::::: ${headers.user}\n" />
+
+			<convertBodyTo id="_convertBodyTo3"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>
+					{
+					"user":"${headers.user}",
+					"passwd":"${headers.passwd}",
+					"nombre":"${headers.nombre}",
+					"apellido":"${headers.apellido}",
+					"apellido2":"${headers.apellido2}",
+					"rut":"${headers.rut}",
+					"ndocumento":"${headers.ndocumento}",
+					"celular":"${headers.celular}",
+					"userRep":"${headers.userRep}"
+					}
+				</simple>
+			</setBody>
+
+			<bean method="putUsuarioPaciente" ref="ora"></bean>
+		</route>
+
+		<route id="_route4">
+			<from id="_rfwsLocation" uri="cxfrs:bean:GeneraToken" />
+
+			<log message="ENTRANDO A LEER USUARIO \n" />
+			<log message="USUARIO  ::::::::::::::: ${headers.user}\n" />
+
+			<convertBodyTo id="_convertBodyTo4"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"user":"${headers.user}","userRep":"${headers.userRep}"}
+				</simple>
+			</setBody>
+
+			<bean method="generarToken" ref="ora"></bean>
+		</route>
+
+		<route id="_route5">
+			<from id="_rfwsLocation" uri="cxfrs:bean:ValidaToken" />
+
+			<log message="ENTRANDO A ValidaToken \n" />
+			<log message="USUARIO  ::::::::::::::: ${headers.user}\n" />
+
+			<convertBodyTo id="_convertBodyTo5"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"user":"${headers.user}","token":"${headers.token}","userRep":"${headers.userRep}"}
+				</simple>
+			</setBody>
+
+			<bean method="validarToken" ref="ora"></bean>
+		</route>
+
+	</camelContext>
+
+
+
+</blueprint>

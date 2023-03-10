@@ -1,0 +1,6 @@
+cl\api\karaf\model\MailResponse.class
+cl\api\karaf\provider\CORSFilter.class
+cl\api\karaf\EnvioCorreo$1.class
+cl\api\karaf\package-info.class
+cl\api\karaf\provider\conexionServicio.class
+cl\api\karaf\EnvioCorreo.class

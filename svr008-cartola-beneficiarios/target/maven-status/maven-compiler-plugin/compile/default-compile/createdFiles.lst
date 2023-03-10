@@ -1,0 +1,5 @@
+cl\api\karaf\cartola\ApiSeguridad.class
+cl\api\karaf\cartola\model\response.class
+cl\api\karaf\cartola\CartolaService.class
+cl\api\karaf\cartola\provider\CORSFilter.class
+cl\api\karaf\cartola\provider\conexionServicio.class

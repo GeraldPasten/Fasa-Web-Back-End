@@ -1,0 +1,8 @@
+cl\api\karaf\convenios\ApiSeguridad.class
+cl\api\karaf\convenios\model\respuesta.class
+cl\api\karaf\convenios\package-info.class
+cl\api\karaf\convenios\model\buscar.class
+cl\api\karaf\convenios\ApiReportes.class
+cl\api\karaf\convenios\provider\conexionServicio.class
+cl\api\karaf\convenios\ApiOracleService.class
+cl\api\karaf\convenios\provider\CORSFilter.class

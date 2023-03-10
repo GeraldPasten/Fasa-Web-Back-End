@@ -1,0 +1,22 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"><grammars><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+    <xs:element name="documentResponse" type="documentResponse"/>
+    <xs:element name="response1" type="response1"/>
+    <xs:complexType name="response1">
+        <xs:sequence>
+            <xs:element name="codigo" type="xs:int"/>
+            <xs:element name="codigoDocumento" type="xs:int"/>
+            <xs:element minOccurs="0" name="convenio" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="nombreDocumento" type="xs:string"/>
+            <xs:element minOccurs="0" name="repositorio" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="documentResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="b64" type="xs:string"/>
+            <xs:element minOccurs="0" name="exception" type="xs:string"/>
+            <xs:element minOccurs="0" name="status" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+</grammars><resources base="/"><resource path="/services/"><resource path="del/document"><method name="DELETE"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="get/document"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="put/document"><method name="PUT"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="upload/file"><method name="POST"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="visualizar/documento"><method name="POST"><request><representation mediaType="multipart/form-data"></representation></request><response><representation mediaType="application/json"></representation></response></method></resource></resource></resources></application>

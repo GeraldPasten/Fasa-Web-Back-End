@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.karaf.auditoria.provider.CORSFilter" />
+
+	<bean id="ora" class="cl.api.karaf.auditoria.ReporteService" />
+
+	<cxf:rsServer id="reporte" address="/reporte"
+		serviceClass="cl.api.karaf.auditoria.ReporteService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<camelContext id="reporte1"
+		xmlns="http://camel.apache.org/schema/blueprint">
+		<route id="_route1">
+			<from id="_rfwsLocation" uri="cxfrs:bean:reporte" />
+
+			<to id="_to1" uri="log:body?level=INFO" />
+
+			<convertBodyTo id="_convertBodyTo1"
+				type="java.lang.String" />
+
+			<setBody>
+				<simple>{"user":"${headers.user}","servicio":"${headers.servicio}","accion":"${headers.accion}","detalle":"${headers.detalle}"}
+				</simple>
+			</setBody>
+
+			<bean method="reporte" ref="ora"></bean>
+		</route>
+
+
+	</camelContext>
+
+</blueprint>

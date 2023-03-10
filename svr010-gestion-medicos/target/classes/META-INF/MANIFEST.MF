@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1678465246581
+Build-Jdk: 1.8.0_202
+Built-By: geral
+Bundle-Blueprint: OSGI-INF/blueprint/blueprint.xml
+Bundle-ManifestVersion: 2
+Bundle-Name: Red Hat Fuse :: SVR010 gestion medicos :: rest
+Bundle-SymbolicName: svr010-gestion-medicos
+Bundle-Version: 7.6.0.fuse-760025-redhat-00001
+Created-By: Apache Maven Bundle Plugin
+Export-Package: cl.api.karaf.medicos;uses:="javax.ws.rs,org.springframew
+ ork.stereotype";version="7.6.0"
+Import-Package: com.microsoft.sqlserver.jdbc;version="[9.2,10)",javax.ws
+ .rs;version="[2.1,3)",javax.ws.rs.container;version="[2.1,3)",javax.ws.
+ rs.core;version="[2.1,3)",javax.ws.rs.ext;version="[2.1,3)",javax.xml.b
+ ind.annotation,org.json;version="[20220924.0,20220925)",org.osgi.servic
+ e.blueprint;version="[1.0.0,2.0.0)",org.slf4j;version="[1.7,2)",org.spr
+ ingframework.stereotype
+Import-Service: org.apache.aries.blueprint.NamespaceHandler;osgi.service
+ .blueprint.namespace=http://cxf.apache.org/transports/http/configuratio
+ n
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-3.5.0.201709291849

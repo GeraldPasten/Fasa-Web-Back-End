@@ -1,0 +1,9 @@
+cl\api\karaf\apisExternas\ApiEnrolar$1.class
+cl\api\karaf\apisExternas\provider\CORSFilter.class
+cl\api\karaf\apisExternas\model\enrolar.class
+cl\api\karaf\apisExternas\ApiValidaRut.class
+cl\api\karaf\apisExternas\ApiEnrolar.class
+cl\api\karaf\apisExternas\ApiEnrolar$2.class
+cl\api\karaf\apisExternas\package-info.class
+cl\api\karaf\apisExternas\ApiReportes.class
+cl\api\karaf\apisExternas\ExternasService.class

@@ -1,0 +1,40 @@
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"><grammars><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified">
+    <xs:element name="actualizaResponse" type="actualizaResponse"/>
+    <xs:element name="response" type="response"/>
+    <xs:complexType name="actualizaResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="carga" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigoError" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="rut" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="response">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="apellido1" type="xs:string"/>
+            <xs:element minOccurs="0" name="apellido2" type="xs:string"/>
+            <xs:element minOccurs="0" name="b64" type="xs:string"/>
+            <xs:element minOccurs="0" name="ciudad" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigoCarga" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigoConvenio" type="xs:string"/>
+            <xs:element minOccurs="0" name="codigoError" type="xs:string"/>
+            <xs:element name="codigoRelacion" type="xs:int"/>
+            <xs:element minOccurs="0" name="comuna" type="xs:string"/>
+            <xs:element minOccurs="0" name="credenciales" type="xs:string"/>
+            <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+            <xs:element minOccurs="0" name="direccion" type="xs:string"/>
+            <xs:element minOccurs="0" name="fechaNacimiento" type="xs:string"/>
+            <xs:element minOccurs="0" name="genero" type="xs:string"/>
+            <xs:element minOccurs="0" name="grupo" type="xs:string"/>
+            <xs:element minOccurs="0" name="id" type="xs:string"/>
+            <xs:element minOccurs="0" name="mail" type="xs:string"/>
+            <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+            <xs:element name="poliza" type="xs:int"/>
+            <xs:element minOccurs="0" name="rutBeneficiario" type="xs:string"/>
+            <xs:element minOccurs="0" name="rutTitular" type="xs:string"/>
+            <xs:element minOccurs="0" name="termino" type="xs:string"/>
+            <xs:element minOccurs="0" name="vigencia" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+</grammars><resources base="/"><resource path="/services/"><resource path="actualizar/beneficiario"><method name="POST"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="csv/beneficiarios"><method name="POST"><request><representation mediaType="multipart/form-data"></representation><representation mediaType="multipart/mixed"></representation></request><response><representation mediaType="application/json"></representation></response></method></resource><resource path="listar/beneficiario"><method name="GET"><request><representation mediaType="*/*"><param name="request" style="plain" type="xs:string"></param></representation></request><response><representation mediaType="application/json"></representation></response></method></resource></resource></resources></application>

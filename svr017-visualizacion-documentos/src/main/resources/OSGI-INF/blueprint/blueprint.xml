@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.karaf.auditoria.provider.CORSFilter" />
+
+	<bean id="ora" class="cl.api.karaf.auditoria.ReporteService" />
+
+	<cxf:rsServer id="mk" address="/mk"
+		serviceClass="cl.api.karaf.auditoria.ReporteService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="up" address="/up"
+		serviceClass="cl.api.karaf.auditoria.ReporteService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="listaD" address="/getDocument"
+		serviceClass="cl.api.karaf.auditoria.ReporteService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="PutD" address="/putDocument"
+		serviceClass="cl.api.karaf.auditoria.ReporteService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+	
+	<cxf:rsServer id="DelD" address="/delDocument"
+		serviceClass="cl.api.karaf.auditoria.ReporteService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<camelContext id="reporte1"
+		xmlns="http://camel.apache.org/schema/blueprint">
+
+		<route id="_route1">
+			<from id="_rfwsLocation" uri="cxfrs:bean:mk" />
+
+			<bean method="reporte" ref="ora"></bean>
+		</route>
+
+		<route id="_route2">
+			<from id="_rfwsLocation2" uri="cxfrs:bean:up" />
+			<convertBodyTo id="_convertBodyTo"
+				type="java.lang.String" />
+			<setBody>
+				<simple>{"archivo":"${headers.archivo}","convenio":"${headers.convenio}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+			<bean method="upload" ref="ora"></bean>
+		</route>
+
+		<route id="_route3">
+			<from id="_rfwsLocation3" uri="cxfrs:bean:listaD" />
+			<convertBodyTo id="_convertBodyTo3"
+				type="java.lang.String" />
+			<setBody>
+				<simple>
+					{"convenio":"${headers.convenio}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+			<bean method="listarDocumentos" ref="ora"></bean>
+		</route>
+
+		<route id="_route4">
+			<from id="_rfwsLocation4" uri="cxfrs:bean:PutD" />
+			<convertBodyTo id="_convertBodyTo4"
+				type="java.lang.String" />
+			<setBody>
+				<simple>
+					{"idDocumento":"${headers.idDocumento}","convenio":"${headers.convenio}","repositorio":"${headers.repositorio}","nombreDocumento":"${headers.nombreDocumento}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+			<bean method="InsertarDocumento" ref="ora"></bean>
+		</route>
+		
+		<route id="_route5">
+			<from id="_rfwsLocation5" uri="cxfrs:bean:DelD" />
+			<convertBodyTo id="_convertBodyTo5"
+				type="java.lang.String" />
+			<setBody>
+				<simple>
+					{"idDocumento":"${headers.idDocumento}","userRep":"${headers.userRep}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+			<bean method="EliminarDocumento" ref="ora"></bean>
+		</route>
+
+
+
+	</camelContext>
+
+</blueprint>

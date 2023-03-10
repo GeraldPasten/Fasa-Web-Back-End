@@ -1,0 +1,12 @@
+cl\api\base\karaf\convenios\model\ValidaToken.class
+cl\api\base\karaf\convenios\provider\ConexionServicio.class
+cl\api\base\karaf\convenios\ApiReportes.class
+cl\api\base\karaf\convenios\model\Usuario.class
+cl\api\base\karaf\convenios\model\OutActualizar.class
+cl\api\base\karaf\convenios\ApiCorreo.class
+cl\api\base\karaf\convenios\model\Response1.class
+cl\api\base\karaf\convenios\provider\CORSFilter.class
+cl\api\base\karaf\convenios\ApiSeguridad.class
+cl\api\base\karaf\convenios\model\TokenModel.class
+cl\api\base\karaf\convenios\ApiOracleService.class
+cl\api\base\karaf\convenios\package-info.class

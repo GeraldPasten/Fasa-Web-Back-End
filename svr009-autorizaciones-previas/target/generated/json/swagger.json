@@ -1,0 +1,13 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "7.6.0.fuse-760025-redhat-00001",
+    "title" : "Red Hat Fuse :: SVR009 autorizaciones previas :: rest",
+    "contact" : { },
+    "license" : {
+      "name" : "Apache 2.0 License",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath" : "/api"
+}

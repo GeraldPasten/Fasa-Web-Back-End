@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.karaf.eliminar.provider.CORSFilter" />
+
+	<bean id="ora" class="cl.api.karaf.eliminar.EliminarService" />
+
+	<cxf:rsServer id="eliminar" address="/eliminarUsuario"
+		serviceClass="cl.api.karaf.eliminar.EliminarService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="listarUsuarios" address="/listando"
+		serviceClass="cl.api.karaf.eliminar.EliminarService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+	
+	<cxf:rsServer id="listarUsuariosRep" address="/listandoRep"
+		serviceClass="cl.api.karaf.eliminar.EliminarService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<camelContext id="Eliminar-context"
+		xmlns="http://camel.apache.org/schema/blueprint">
+
+		<route id="_route1">
+
+			<from id="_rfwsLocation" uri="cxfrs:bean:eliminar" />
+
+			<to id="_to1" uri="log:body?level=INFO" />
+			<log message="ENTRANDO A ELIMINARUSUARIO \n" />
+
+			<convertBodyTo id="_convertBodyTo1"
+				type="java.lang.String" />
+			<setBody>
+				<simple>{"id":"${headers.id}","userRep":"${headers.userRep}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="eliminarUsuario" ref="ora"></bean>
+		</route>
+
+		<route id="_route2">
+
+			<from id="_rfwsLocation" uri="cxfrs:bean:listarUsuarios" />
+
+			<to id="_to2" uri="log:body?level=INFO" />
+			<log message="ENTRANDO A LISTAR \n" />
+
+			<convertBodyTo id="_convertBodyTo2"
+				type="java.lang.String" />
+			<setBody>
+				<simple>{"user":"${headers.user}","convenio":"${headers.convenio}","token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="getAllUsuarios" ref="ora"></bean>
+		</route>
+		
+		<route id="_route3">
+
+			<from id="_rfwsLocation" uri="cxfrs:bean:listarUsuariosRep" />
+
+			<to id="_to3" uri="log:body?level=INFO" />
+			<log message="ENTRANDO A LISTAR \n" />
+			
+			<convertBodyTo id="_convertBodyTo3"
+				type="java.lang.String" />
+			<setBody>
+				<simple>{"token":"${headers.token}"}
+				</simple>
+			</setBody>
+
+			<bean method="getAllUsuariosRep" ref="ora"></bean>
+		</route>
+
+	</camelContext>
+
+
+
+</blueprint>

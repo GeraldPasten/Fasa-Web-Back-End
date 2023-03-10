@@ -1,0 +1,8 @@
+cl\api\karaf\medicos\provider\CORSFilter.class
+cl\api\karaf\medicos\provider\conexionServicio.class
+cl\api\karaf\medicos\ApiReportes.class
+cl\api\karaf\medicos\model\response.class
+cl\api\karaf\medicos\ApiSeguridad.class
+cl\api\karaf\medicos\MedicoService.class
+cl\api\karaf\medicos\model\Codigolista.class
+cl\api\karaf\medicos\model\medicos.class

@@ -1,0 +1,5 @@
+cl\api\karaf\auditoria\provider\conexionServicio.class
+cl\api\karaf\auditoria\provider\CORSFilter.class
+cl\api\karaf\auditoria\ReporteService.class
+cl\api\karaf\auditoria\ApiSeguridad.class
+cl\api\karaf\auditoria\model\auditoria.class

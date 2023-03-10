@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+	xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		   http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint-3.10.0.xsd">
+
+	<bean id="cors-filter"
+		class="cl.api.karaf.apisExternas.provider.CORSFilter" />
+
+	<bean id="ora" class="cl.api.karaf.apisExternas.ExternasService" />
+
+	<cxf:rsServer id="rut" address="/rut"
+		serviceClass="cl.api.karaf.apisExternas.ExternasService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+	<cxf:rsServer id="enrolamiento" address="/enrolar"
+		serviceClass="cl.api.karaf.apisExternas.ExternasService">
+		<cxf:providers>
+			<ref component-id="cors-filter" />
+		</cxf:providers>
+	</cxf:rsServer>
+
+
+	<camelContext id="externas-context"
+		xmlns="http://camel.apache.org/schema/blueprint">
+
+		<route id="_route1">
+			<from id="_rfwsLocation1" uri="cxfrs:bean:rut" />
+
+			<log message="ENTRANDO A Valida Rut\n ${body}" />
+
+			<convertBodyTo id="_convertBodyTo1"
+				type="java.lang.String" />
+
+			<bean method="validarut" ref="ora"></bean>
+		</route>
+
+		<route id="_route2">
+			<from id="_rfwsLocation2" uri="cxfrs:bean:enrolamiento" />
+
+			<log message="ENTRANDO A Enrolamiento\n ${body}" />
+
+			<convertBodyTo id="_convertBodyTo2"
+				type="java.lang.String" />
+
+			<bean method="Enrolar" ref="ora"></bean>
+		</route>
+
+
+	</camelContext>
+
+
+
+</blueprint>
