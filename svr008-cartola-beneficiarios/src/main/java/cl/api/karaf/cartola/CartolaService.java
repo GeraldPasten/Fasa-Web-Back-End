@@ -55,7 +55,7 @@ public class CartolaService {
 			ArrayList<response> datos = service.GetCartola(Tipo, codigoConvenio, rut, fechaIni, fechaFin);
 			ArrayList<response> excel = new ArrayList<response>();
 
-			if (datos.size() > 63) {
+			if (datos.size() > 5000) {
 				// Create the header row
 				HSSFRow headerRow = sheet.createRow(0);
 				Field[] fields = response.class.getDeclaredFields();
